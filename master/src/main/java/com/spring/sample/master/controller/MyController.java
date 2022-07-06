@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.sample.master.service.MyService;
 
+
 @Controller
 public class MyController {
     
