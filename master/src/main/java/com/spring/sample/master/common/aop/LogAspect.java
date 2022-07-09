@@ -18,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class LogAspect {
     
+    @Pointcut("@annotation(com.spring.sample.master.common.aop.annotation.MyServiceLog)")
+    public void serviceMethodLog() {}
+
     @Pointcut("execution(* com.spring.sample.master.service.*.*(..))")
     public void serviceExecution() {}
 
@@ -26,35 +29,35 @@ public class LogAspect {
 
 
     //@Before("execution(* com.spring.sample.master.service.*.*(..))")
-    @Before(value = "getMapping()")
-    public void beforeLog(JoinPoint jp) {
-        String typeName = jp.getSignature().getDeclaringTypeName();
-        String name = jp.getSignature().getName();
-        log.info("[BEFORE] - " + typeName + " / " + name);
-    }
+    // @Before(value = "getMapping()")
+    // public void beforeLog(JoinPoint jp) {
+    //     String typeName = jp.getSignature().getDeclaringTypeName();
+    //     String name = jp.getSignature().getName();
+    //     log.info("[BEFORE] - " + typeName + " / " + name);
+    // }
 
-    @After("execution(* com.spring.sample.master.service.*.*(..))")
-    public void afterLog(JoinPoint jp) throws Throwable {
-        String typeName = jp.getSignature().getDeclaringTypeName();
-        String name = jp.getSignature().getName();
-        log.info("[AFTER] - " + typeName + " / " + name);
-    }
+    // @After("execution(* com.spring.sample.master.service.*.*(..))")
+    // public void afterLog(JoinPoint jp) throws Throwable {
+    //     String typeName = jp.getSignature().getDeclaringTypeName();
+    //     String name = jp.getSignature().getName();
+    //     log.info("[AFTER] - " + typeName + " / " + name);
+    // }
 
-    @AfterReturning("execution(* com.spring.sample.master.service.*.*(..))")
-    public void afterReturningLog(JoinPoint jp) {
-        String typeName = jp.getSignature().getDeclaringTypeName();
-        String name = jp.getSignature().getName();
-        log.info("[AFTER-RETURNING] - " + typeName + " / " + name);
-    }
+    // @AfterReturning("execution(* com.spring.sample.master.service.*.*(..))")
+    // public void afterReturningLog(JoinPoint jp) {
+    //     String typeName = jp.getSignature().getDeclaringTypeName();
+    //     String name = jp.getSignature().getName();
+    //     log.info("[AFTER-RETURNING] - " + typeName + " / " + name);
+    // }
 
-    @AfterThrowing("execution(* com.spring.sample.master.service.*.*(..))")
-    public void afterThrowingLog(JoinPoint jp) {
-        String typeName = jp.getSignature().getDeclaringTypeName();
-        String name = jp.getSignature().getName();
-        log.info("[AFTER-THROWING] - " + typeName + " / " + name);
-    }
+    // @AfterThrowing("execution(* com.spring.sample.master.service.*.*(..))")
+    // public void afterThrowingLog(JoinPoint jp) {
+    //     String typeName = jp.getSignature().getDeclaringTypeName();
+    //     String name = jp.getSignature().getName();
+    //     log.info("[AFTER-THROWING] - " + typeName + " / " + name);
+    // }
 
-    @Around("execution(* com.spring.sample.master.service.*.*(..))")
+    @Around("serviceMethodLog()")
     public Object aroundLog(ProceedingJoinPoint pjp) throws Throwable {
         long startTime = System.currentTimeMillis();
         Object result = pjp.proceed();
@@ -67,7 +70,5 @@ public class LogAspect {
 
         return result;
     }
-
-
  
 }
