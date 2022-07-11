@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.sample.master.common.aop.annotation.Decode;
 import com.spring.sample.master.dto.MyUser;
 import com.spring.sample.master.service.MyService;
 
@@ -24,13 +23,12 @@ public class MyController {
     @GetMapping("/test/{param}")
     @ResponseBody
     public ResponseEntity<?> testGet(@PathVariable("param") int param) {
-        return new ResponseEntity<>(service.testGetMethod(param), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(service.testGetMethod(param));
     }
 
     @PostMapping("/test")
     @ResponseBody
-    @Decode
     public ResponseEntity<?> testPost(@RequestBody MyUser myUser) {
-        return new ResponseEntity<>(service.testPostMethod(myUser), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(service.testPostMethod(myUser));
     }
 }

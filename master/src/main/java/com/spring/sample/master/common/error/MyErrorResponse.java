@@ -16,3 +16,4 @@ public class MyErrorResponse {
         return new MyErrorResponse(errorCode.getHttpStatus(), errorCode.getErrorCode(), errorCode.getMessage());
     }
 }
+

@@ -7,7 +7,7 @@ import com.spring.sample.master.common.error.MyErrorCode;
 
 import lombok.Getter;
 
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+// @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 @Getter
 public class MyException extends RuntimeException {
     private MyErrorCode errorCode;
@@ -17,3 +17,5 @@ public class MyException extends RuntimeException {
         this.errorCode = errorCode;
     }
 }
+
+

@@ -30,8 +30,8 @@ public class DecodeAspect {
             if(obj instanceof MyUser) {
                 MyUser myUser = MyUser.class.cast(obj);
 
-                String decodedEmail =  myUser.getEmail();
-                String email = new String(Base64.getDecoder().decode(decodedEmail), "UTF-8");
+                String encodedEmail =  myUser.getEmail();
+                String email = new String(Base64.getDecoder().decode(encodedEmail), "UTF-8");
 
                 myUser.setEmail(email);
             }
@@ -39,7 +39,7 @@ public class DecodeAspect {
     }
 
     @AfterReturning(value = "cut()", returning = "returnObject")
-    public void after(JoinPoint jp, Object returnObject) throws UnsupportedEncodingException {
+    public void afterReturning(JoinPoint jp, Object returnObject) throws UnsupportedEncodingException {
         if(returnObject instanceof MyUser) {
             MyUser myUser = MyUser.class.cast(returnObject);
 

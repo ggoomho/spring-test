@@ -20,3 +20,5 @@ public class MyExceptionHandler {
         return ResponseEntity.status(errorResponse.getHttpStatus()).body(errorResponse);
     }
 }
+
+

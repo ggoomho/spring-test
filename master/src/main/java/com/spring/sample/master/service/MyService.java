@@ -2,6 +2,7 @@ package com.spring.sample.master.service;
 
 import org.springframework.stereotype.Service;
 
+import com.spring.sample.master.common.aop.annotation.Decode;
 import com.spring.sample.master.common.aop.annotation.MyServiceLog;
 import com.spring.sample.master.common.error.MyErrorCode;
 import com.spring.sample.master.common.exception.MyException;
@@ -15,17 +16,17 @@ public class MyService {
     
     @MyServiceLog
     public int testGetMethod(int param) {
-        log.info("MyService - testMethod proceeding....");
+        log.info("MyService - testMethod 실행중....");
         
         if(param == 1) {
             throw new MyException(MyErrorCode.MY_BAD_REQUEST);
         }
-        //int x = 5/param;
 
         return param;
     }
 
     @MyServiceLog
+    @Decode
     public MyUser testPostMethod(MyUser myUser) {
         log.info("user name: " + myUser.getName());
         log.info("user email: " + myUser.getEmail());
